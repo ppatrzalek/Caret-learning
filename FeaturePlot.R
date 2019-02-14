@@ -55,4 +55,28 @@ featurePlot(x = iris[,1:4], y = iris$Species,
             ),
             layout = c(4, 1),
             auto.key = list(columns = 2))
-            
+
+# 1.6 Scatter plot
+library(mlbench)
+data("BostonHousing")
+regVar <- c("age", "lstat", "tax")
+str(BostonHousing[, regVar])
+
+theme1 <- trellis.par.get()
+theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
+theme1$plot.symbol$pch = 16
+theme1$plot.line$col = rgb(1, 0, 0, .7)
+theme1$plot.line$lwd = 2
+
+trellis.par.set(theme1)
+featurePlot(x = BostonHousing[, regVar],
+            y = BostonHousing$medv,
+            plot = "scatter",
+            layout = c(3, 1))
+
+featurePlot(x = BostonHousing[, regVar],
+            y = BostonHousing$medv,
+            plot = "scatter",
+            type = c("p", "smooth"),
+            span = .5,
+            layout = c(3, 1))
